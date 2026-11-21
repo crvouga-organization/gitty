@@ -21,9 +21,9 @@ jobs:
       service_id: lanes
       dockerfile: ./Dockerfile
       context: .
-      image_owner: crvouga
+      image_owner: crvouga-organization
       image_prefix: chrisvouga
-      infra_github_repo: crvouga/personal
+      infra_github_repo: crvouga-organization/personal
 
   gitty_storybook:
     uses: crvouga-organization/personal/.github/workflows/publish.yml@main
@@ -34,6 +34,6 @@ jobs:
       service_id: gitty-storybook
       dockerfile: ./Dockerfile.storybook
       context: .
-      image_owner: crvouga
+      image_owner: crvouga-organization
       image_prefix: chrisvouga
-      infra_github_repo: crvouga/personal
+      infra_github_repo: crvouga-organization/personal
