@@ -13,7 +13,7 @@ permissions:
 jobs:
 
   lanes:
-    uses: crvouga/personal/.github/workflows/publish.yml@main
+    uses: crvouga-organization/personal/.github/workflows/publish.yml@main
     secrets:
       DEPLOY_DISPATCH_TOKEN: ${{ secrets.DEPLOY_DISPATCH_TOKEN }}
       CALLER_GITHUB_TOKEN: ${{ github.token }}
@@ -26,7 +26,7 @@ jobs:
       infra_github_repo: crvouga/personal
 
   gitty_storybook:
-    uses: crvouga/personal/.github/workflows/publish.yml@main
+    uses: crvouga-organization/personal/.github/workflows/publish.yml@main
     secrets:
       DEPLOY_DISPATCH_TOKEN: ${{ secrets.DEPLOY_DISPATCH_TOKEN }}
       CALLER_GITHUB_TOKEN: ${{ github.token }}
