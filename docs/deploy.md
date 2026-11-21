@@ -125,7 +125,7 @@ services from prebuilt public images: the public `lanes` server and the internal
 
 1. Every push to `main` runs `.github/workflows/publish.yml`. It calls the shared workflow in
    `crvouga/personal`, which builds the `Dockerfile` for `linux/amd64` and pushes
-   `ghcr.io/crvouga-organization/chrisvouga-lanes:<sha>` and `:latest` (public, anonymous pulls).
+   `ghcr.io/crvouga/chrisvouga-lanes:<sha>` and `:latest` (public, anonymous pulls).
 2. It then asks `crvouga/personal` to deploy that SHA. Railway never builds code.
 3. The services, hostname, plain env vars and Vault secrets are declared in `crvouga/personal`'s
    OpenTofu inventory. Request changes with a `[hosting] lanes — …` issue on `crvouga/personal`;
@@ -191,7 +191,7 @@ Redeploy a given commit (a human, from a machine with access to `crvouga/persona
 
 The component Storybook is published for review as its own static service. Every push to `main`
 builds `Dockerfile.storybook` (`pnpm storybook:build`, served by nginx on port 80, health `/`)
-into `ghcr.io/crvouga-organization/chrisvouga-gitty-storybook` through the `gitty_storybook` job in
+into `ghcr.io/crvouga/chrisvouga-gitty-storybook` through the `gitty_storybook` job in
 `.github/workflows/publish.yml`. Stories run Zero offline in memory, so it needs no secrets, database or
 server. The service entry lives in `crvouga/personal` like `lanes`.
 
