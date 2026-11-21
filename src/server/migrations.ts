@@ -2,7 +2,7 @@
 // and additive (expand/migrate/contract): never edit or reorder an applied migration, and never
 // add a destructive one here; those need a reviewed plan and run by hand.
 //
-// The schema itself is allocated by crvouga/personal; migrations only create objects inside it.
+// The schema itself is allocated by crvouga-organization/personal; migrations only create objects inside it.
 // They run at boot (MIGRATE_ON_BOOT, default on) and via `pnpm db:migrate`.
 
 import type { Db } from "./db.ts";
@@ -190,7 +190,7 @@ export const MIGRATIONS: readonly Migration[] = [
 export async function migrate(db: Db): Promise<number[]> {
   const exists = await db.query<{ ok: number }>("select 1 as ok from pg_namespace where nspname = $1", [db.schema]);
   if (!exists.length) {
-    throw new Error(`database schema "${db.schema}" does not exist: it must be allocated by crvouga/personal (a [database] request), not created by the app`);
+    throw new Error(`database schema "${db.schema}" does not exist: it must be allocated by crvouga-organization/personal (a [database] request), not created by the app`);
   }
   return db.transaction(async (q) => {
     await q.query("select pg_advisory_xact_lock(hashtext($1))", [`lanes-migrate:${db.schema}`]);

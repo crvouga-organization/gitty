@@ -44,7 +44,7 @@ disposable cache (see [Zero sync](#zero-sync)).
 
 - `DATABASE_URL` (Vault, shared key) is opaque and passed to the driver unchanged; it is never
   logged. Lanes touches only its allocated schema (`DATABASE_SCHEMA`, default `lanes`); the
-  schema is allocated by `crvouga/personal`, never created by the app.
+  schema is allocated by `crvouga-organization/personal`, never created by the app.
 - Raw, parameterized SQL (`postgres` driver) over a pool of `DATABASE_POOL_MAX` (5) connections
   with a 30 s statement timeout. Migrations (`src/server/migrations.ts`) are append-only and
   additive; they run at boot (`MIGRATE_ON_BOOT`, default on) under an advisory lock, and with
@@ -124,11 +124,11 @@ services from prebuilt public images: the public `lanes` server and the internal
 `lanes-zero` sidecar (see [Zero sync](#production-sidecar-lanes-zero)).
 
 1. Every push to `main` runs `.github/workflows/publish.yml`. It calls the shared workflow in
-   `crvouga/personal`, which builds the `Dockerfile` for `linux/amd64` and pushes
+   `crvouga-organization/personal`, which builds the `Dockerfile` for `linux/amd64` and pushes
    `ghcr.io/crvouga/chrisvouga-lanes:<sha>` and `:latest` (public, anonymous pulls).
-2. It then asks `crvouga/personal` to deploy that SHA. Railway never builds code.
-3. The services, hostname, plain env vars and Vault secrets are declared in `crvouga/personal`'s
-   OpenTofu inventory. Request changes with a `[hosting] lanes — …` issue on `crvouga/personal`;
+2. It then asks `crvouga-organization/personal` to deploy that SHA. Railway never builds code.
+3. The services, hostname, plain env vars and Vault secrets are declared in `crvouga-organization/personal`'s
+   OpenTofu inventory. Request changes with a `[hosting] lanes — …` issue on `crvouga-organization/personal`;
    never change them in the Railway dashboard.
 
 | Setting | Value |
@@ -162,7 +162,7 @@ document is shared by all personal apps. The list is defined once in
 | `LANES_ZERO_ADMIN_PASSWORD` | `ZERO_ADMIN_PASSWORD` | yes | sidecar only; `openssl rand -base64 24` (zero-cache admin/inspector password) |
 | `LANES_GITHUB_PUBLIC_TOKEN` | `GITHUB_PUBLIC_TOKEN` | no | fine-grained token with no repository access |
 
-- **Production:** the service's inventory entry in `crvouga/personal` binds each runtime name to
+- **Production:** the service's inventory entry in `crvouga-organization/personal` binds each runtime name to
   its Vault key (`{ "name": "SESSION_SECRET", "source": "vault", "vault_key": "LANES_SESSION_SECRET" }`),
   so they arrive as plain env vars. The server never talks to Vault itself.
 - **Local:** `pnpm dev:server:vault` runs the server under `personal infra-vault run` (config from
@@ -173,7 +173,7 @@ document is shared by all personal apps. The list is defined once in
   `prd` or `dev`. It is advisory, not part of **CI ok**: a release missing a secret still never
   goes live, because the server refuses to boot and fails its health check. Run it locally after
   `vault login`.
-- **Adding or changing a key:** open a `[secrets] lanes — …` issue on `crvouga/personal` with key
+- **Adding or changing a key:** open a `[secrets] lanes — …` issue on `crvouga-organization/personal` with key
   names only. Vault contents are managed by OpenTofu there; never write them by hand.
 - **At boot**, in production the server exits with a message naming any missing `APP_ORIGIN`,
   `SESSION_SECRET`, `GITHUB_CLIENT_ID`, `GITHUB_CLIENT_SECRET` or `GITHUB_WEBHOOK_SECRET`, so a
@@ -184,7 +184,7 @@ The GitHub App's callback URL is `https://lanes.chrisvouga.dev/auth/github/callb
 webhook URL is `https://lanes.chrisvouga.dev/webhooks/github`. The relay client's callback is
 `https://lanes.chrisvouga.dev/auth/callback`.
 
-Redeploy a given commit (a human, from a machine with access to `crvouga/personal`):
+Redeploy a given commit (a human, from a machine with access to `crvouga-organization/personal`):
 `gh workflow run deploy.yml -R crvouga-organization/personal -f action=deploy -f service_id=lanes -f image_tag=<sha>`.
 
 ## Storybook: `gitty-storybook.chrisvouga.dev`
@@ -193,7 +193,7 @@ The component Storybook is published for review as its own static service. Every
 builds `Dockerfile.storybook` (`pnpm storybook:build`, served by nginx on port 80, health `/`)
 into `ghcr.io/crvouga/chrisvouga-gitty-storybook` through the `gitty_storybook` job in
 `.github/workflows/publish.yml`. Stories run Zero offline in memory, so it needs no secrets, database or
-server. The service entry lives in `crvouga/personal` like `lanes`.
+server. The service entry lives in `crvouga-organization/personal` like `lanes`.
 
 ## 1. Create the GitHub App
 

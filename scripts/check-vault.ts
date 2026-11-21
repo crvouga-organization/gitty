@@ -58,6 +58,6 @@ for (const config of configs) {
   }
 }
 if (failed) {
-  console.log(`\nMissing or invalid keys. Request them with a "[secrets] lanes — …" issue on crvouga/personal (names only, never values); see docs/deploy.md.`);
+  console.log(`\nMissing or invalid keys. Request them with a "[secrets] lanes — …" issue on crvouga-organization/personal (names only, never values); see docs/deploy.md.`);
   process.exit(1);
 }
