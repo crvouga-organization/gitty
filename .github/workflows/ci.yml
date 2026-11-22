@@ -4,6 +4,7 @@ on:
   push:
     branches: [main]
   pull_request:
+    paths-ignore: ['**.md', 'docs/**']
   merge_group:
   workflow_dispatch:
 
@@ -221,6 +222,7 @@ jobs:
   # The only check the main ruleset requires (see .github/repo-settings.json).
   # Add new jobs to `needs` instead of editing the ruleset.
   ci-ok:
+    timeout-minutes: 30
     name: CI ok
     if: always()
     needs: [test, e2e, build, storybook]
