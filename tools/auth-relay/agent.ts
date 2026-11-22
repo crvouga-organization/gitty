@@ -1,4 +1,4 @@
-// Vendored, unmodified below this header, from crvouga-organization/personal
+// Vendored, unmodified below this header, from crvouga/personal
 // packages/auth-relay/agent.ts @ e2bee6f9dca49585b1ab9a3b09ee0949e7268297 (reviewed).
 // Runs with Bun; kept outside tsconfig. Usage: see tools/auth-relay/README.md.
 /** Standalone Bun client. Safe to copy into another repository; no workspace imports. */

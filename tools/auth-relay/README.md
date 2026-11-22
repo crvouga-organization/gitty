@@ -9,7 +9,7 @@ the registration credential is not, and never reaches the app.
 | `registration.production.json` | `https://auth.chrisvouga.dev` | `secret/auth-relay-agents/lanes-prd/prd` | up to 366 days |
 | `registration.localhost.json` | `https://auth-dev.chrisvouga.dev` | `secret/auth-relay-agents/lanes-dev/dev` | up to 7 days |
 
-The credentials are created by `crvouga-organization/personal` (OpenTofu) and approved by a relay operator
+The credentials are created by `crvouga/personal` (OpenTofu) and approved by a relay operator
 (the `[hosting] lanes` request covers it). Then:
 
 ```sh
@@ -20,4 +20,4 @@ pnpm relay:register:local             # same for http://localhost:8787 (re-run w
 
 Registering again renews the lease and keeps the client id. Put the printed `OIDC_ISSUER` and
 `OIDC_CLIENT_ID` in the service's plain env (production) or your shell (local). `agent.ts` is
-vendored from `crvouga-organization/personal` at a reviewed commit; update it deliberately.
+vendored from `crvouga/personal` at a reviewed commit; update it deliberately.
