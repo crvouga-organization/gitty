@@ -214,7 +214,7 @@ jobs:
           code=${PIPESTATUS[0]}
           if [ "$code" != "0" ]; then
             missing=$(grep -E '^\s+FAIL' vault-check.txt | awk '{print $2}' | sort -u | paste -sd ', ' -)
-            echo "::warning title=Vault secrets missing::${missing:-Vault check failed (exit $code)}. Request them on crvouga-organization/personal; the server will not boot without them."
+            echo "::warning title=Vault secrets missing::${missing:-Vault check failed (exit $code)}. Request them on crvouga/personal; the server will not boot without them."
             { echo "### Vault secrets missing"; echo; echo '```'; cat vault-check.txt; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
           fi
           exit 0

@@ -14,7 +14,7 @@ import { createServer, type Socket } from "node:net";
 
 export interface TestDb {
   url: string;
-  /** Allocate a fresh, empty schema (what crvouga-organization/personal does for a real app). */
+  /** Allocate a fresh, empty schema (what crvouga/personal does for a real app). */
   allocateSchema(name?: string): Promise<string>;
   query<T = Record<string, unknown>>(sql: string, params?: unknown[]): Promise<T[]>;
   close(): Promise<void>;

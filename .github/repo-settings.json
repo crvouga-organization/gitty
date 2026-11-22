@@ -1,6 +1,6 @@
 {
   "$comment": "Source of truth for GitHub repository settings. Apply with `pnpm github:apply`, check drift with `pnpm github:check`. Edit here, never in the GitHub UI.",
-  "repository": "crvouga-organization/gitty",
+  "repository": "crvouga/gitty",
   "settings": {
     "default_branch": "main",
     "allow_squash_merge": true,
