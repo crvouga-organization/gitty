@@ -4,7 +4,7 @@
 #   docker build -f Dockerfile.storybook -t lanes-storybook .
 #   docker run --rm -p 8080:80 lanes-storybook
 
-FROM node:24-bookworm-slim AS build
+FROM node:25-bookworm-slim AS build
 WORKDIR /app
 ENV PNPM_HOME=/pnpm PATH=/pnpm:$PATH CI=1
 # git: the Storybook build generates the stories' fixture repository with it.
